@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://labs.ibrahimraimi.xyz/sitemap.xml
+Sitemap: https://studies.ibrahimraimi.xyz/sitemap.xml

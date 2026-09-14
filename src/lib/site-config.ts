@@ -2,7 +2,7 @@ export const siteConfig = {
 	name: "Index of Studies",
 	tagline:
 		"A collection of ideas and experimental works exploring motion, interaction, and visual systems.",
-	url: "https://labs.ibrahimraimi.xyz",
+	url: "https://studies.ibrahimraimi.xyz",
 	author: "Ibrahim Raimi",
 	authorUrl: "https://ibrahimraimi.xyz",
 	email: "ibrahimraimi.tech@gmail.com",
