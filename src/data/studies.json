@@ -1,0 +1,74 @@
+[
+	{
+		"id": "S-001",
+		"title": "On-Scroll Image Distortion and Grain Effect",
+		"field": "WebGL",
+		"year": 2026,
+		"url": "https://001-shaders-on-scroll.netlify.app",
+		"description": "An interactive WebGL image gallery exploring on-scroll distortion and procedural rain."
+	},
+	{
+		"id": "S-002",
+		"title": "WebGL Rotating Infinite Image Gallery",
+		"field": "JavaScript",
+		"year": 2026,
+		"url": "https://002-webgl-rotating-infinite-gallery.netlify.app",
+		"description": "Progressive image rotation effect with WebGL, using OGL and GLSL shaders."
+	},
+	{
+		"id": "S-003",
+		"title": "Infinite Scroll Gallery with Page Transitions",
+		"field": "JavaScript",
+		"year": 2026,
+		"url": "https://003-infinite-scroll-and-transition.netlify.app",
+		"description": "Infinite GSAP gallery with parallax scrolling, reveal animations, and Flip-powered fullscreen transitions."
+	},
+	{
+		"id": "S-004",
+		"title": "Cursor Trailer Effect",
+		"field": "JavaScript",
+		"year": 2026,
+		"url": "https://004-cursor-trailer-effect.netlify.app/",
+		"description": "An interactive cursor trail that renders a sequence of images with smooth GSAP animations."
+	},
+	{
+		"id": "S-005",
+		"title": "Vortex Gallery",
+		"field": "WebGL",
+		"year": 2026,
+		"url": "https://005-vortex-gallery.netlify.app",
+		"description": "An immersive, high-performance 3D interactive art and photography gallery situated in a virtual vortex"
+	},
+	{
+		"id": "S-006",
+		"title": "Expand On Hover",
+		"field": "JavaScript",
+		"year": 2026,
+		"url": "https://006-expand-on-hover.netlify.app",
+		"description": "A playful interaction study focused on hover states and expansion fluidity."
+	},
+	{
+		"id": "S-007",
+		"title": "Card Stack On Scroll",
+		"field": "JavaScript",
+		"year": 2026,
+		"url": "https://007-card-stack-scroll.netlify.app",
+		"description": "Interactive sticky card stack with smooth scroll-based scaling animations."
+	},
+	{
+		"id": "S-008",
+		"title": "Horizontal Scroll",
+		"field": "JavaScript",
+		"year": 2026,
+		"url": "https://008-horizontal-scroll.netlify.app",
+		"description": "An editorial photograph gallery featuring smooth horizontal scrolling and interactive image expansion transitions."
+	},
+	{
+		"id": "S-009",
+		"title": "Inkwell Intro",
+		"field": "WebGL",
+		"year": 2026,
+		"url": "https://009-inkwell-intro.netlify.app",
+		"description": "Recreation of the inkwell.tech opening ring: WebGL cards in OGL, choreography in GSAP, hover as a distance field."
+	}
+]

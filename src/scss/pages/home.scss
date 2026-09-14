@@ -1,0 +1,497 @@
+@use '../utils' as *;
+
+.home-page {
+  max-width: $container-max-width;
+  margin-inline: auto;
+  padding-inline: $container-padding-inline;
+  padding-block: $space-8;
+
+  @include media-down('tablet') {
+    padding-block: $space-4;
+  }
+}
+
+.nav {
+  position: fixed;
+  top: 6px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: $z-nav;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-col-repeat), 1fr);
+  column-gap: var(--grid-col-gap);
+  padding-inline: var(--grid-padding);
+  pointer-events: none;
+  align-items: center;
+
+  a,
+  button {
+    pointer-events: auto;
+    font-size: $font-size-nav;
+    font-weight: $font-weight-medium;
+    letter-spacing: $tracking-tight;
+    line-height: 1;
+  }
+
+  &__left {
+    grid-column: 1 / span 1;
+    display: flex;
+    align-items: center;
+    gap: 16rem;
+    height: fit-content;
+
+    @include media-down('tablet') {
+      grid-column: 1 / span 2;
+    }
+  }
+
+  &__center {
+    grid-column: 3 / span 1;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    height: fit-content;
+  }
+
+  &__right {
+    grid-column: 4 / span 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+    margin-left: auto;
+    height: fit-content;
+  }
+
+  &__group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 49rem;
+    gap: 5rem;
+  }
+
+  &__name {
+    font-weight: $font-weight-bold;
+  }
+
+  &__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: fit-content;
+    line-height: 1;
+    gap: 4px;
+  }
+
+  &__arrow,
+  &-arrow {
+    width: 9px;
+    height: 9px;
+    margin-top: -1px;
+  }
+}
+
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 100rem;
+  padding-top: 50rem;
+  padding-inline: var(--grid-padding);
+  margin-bottom: 120rem;
+
+  @include media-down('tablet') {
+    padding-top: 70rem;
+    margin-bottom: 60rem;
+  }
+
+  &__contents {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-col-repeat), 1fr);
+    column-gap: var(--grid-col-gap);
+    row-gap: 10rem;
+
+    @include media-down('tablet') {
+      row-gap: 0;
+    }
+  }
+
+  &__title {
+    display: contents;
+    font-weight: $font-weight-regular;
+  }
+
+  &__cell {
+    display: block;
+    overflow: hidden;
+    font-size: $font-size-hero;
+    font-weight: $font-weight-regular;
+    line-height: $leading-hero;
+    letter-spacing: $tracking-hero;
+    text-transform: uppercase;
+
+    @include media-down('tablet') {
+      font-size: $font-size-hero-mobile;
+    }
+  }
+
+  &__word {
+    display: block;
+    will-change: transform;
+    font-weight: $font-weight-regular;
+  }
+
+  &__index {
+    grid-column: 1 / span 1;
+    grid-row: 1;
+
+    @include media-down('tablet') {
+      grid-column: 1 / span 2;
+    }
+  }
+
+  &__of {
+    grid-column: 4 / span 1;
+    grid-row: 1;
+    text-align: left;
+
+    @include media-down('tablet') {
+      grid-column: 4 / span 1;
+    }
+  }
+
+  &__studies {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+
+    @include media-down('tablet') {
+      grid-column: 1 / span 3;
+    }
+  }
+
+  &__count {
+    grid-column: 4 / span 1;
+    grid-row: 2;
+    text-align: right;
+
+    @include media-down('tablet') {
+      grid-column: 3 / span 2;
+    }
+  }
+
+  &__read {
+    grid-column: 3 / span 1;
+    grid-row: 3;
+    padding-top: 60rem;
+
+    @include media-down('tablet') {
+      grid-column: 1 / span 3;
+      padding-top: 40rem;
+    }
+  }
+
+  &__desc {
+    margin: 0;
+    font-size: $font-size-desc;
+    font-weight: $font-weight-medium;
+    line-height: $leading-hero;
+    letter-spacing: $tracking-desc;
+    text-transform: uppercase;
+    color: $color-text-primary;
+  }
+}
+
+.footer,
+.studies-block {
+  width: 100%;
+  height: 100svh;
+  min-height: 300px;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-col-repeat), 1fr);
+  column-gap: var(--grid-col-gap);
+  row-gap: 20rem;
+  padding-inline: var(--grid-padding);
+  align-items: center;
+  align-content: center;
+
+  p {
+    grid-column: 2 / span 1;
+    margin: 0;
+    font-size: $font-size-desc;
+    font-weight: $font-weight-medium;
+    line-height: $leading-desc;
+    letter-spacing: $tracking-desc;
+    text-transform: uppercase;
+    color: $color-text-primary;
+
+    @include media-down('tablet') {
+      grid-column: 2 / span 2;
+    }
+
+    @include media-down('mobile') {
+      grid-column: 1 / span 4;
+    }
+  }
+
+  a,
+  .footer__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6rem;
+    width: fit-content;
+    position: relative;
+    line-height: 1.1;
+    font-size: $font-size-desc;
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    color: $color-text-primary;
+    text-decoration: none;
+
+    .arrow,
+    .footer__arrow {
+      display: inline-block;
+      transform: rotate(-35deg);
+      transition: transform 0.2s ease;
+    }
+
+    [data-target='line'],
+    .footer__link-text {
+      display: inline-block;
+      width: fit-content;
+      position: relative;
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0%;
+        height: 1px;
+        background: currentColor;
+        transition: width 0.3s ease;
+      }
+    }
+
+    &:hover {
+
+      [data-target='line']::after,
+      .footer__link-text::after {
+        width: 100%;
+      }
+
+      .arrow,
+      .footer__arrow {
+        transform: rotate(-35deg) translate(2rem, -2rem);
+      }
+    }
+  }
+
+  small {
+    display: block;
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    color: $color-text-primary;
+    opacity: 0.6;
+    padding-top: 40rem;
+    line-height: 1;
+  }
+}
+
+.studies-lists {
+  position: relative;
+  padding-inline: var(--grid-padding);
+  padding-bottom: 120rem;
+  color: $color-text-primary;
+
+  &__head {
+    position: sticky;
+    top: 400px;
+    left: 0;
+    z-index: 10;
+    pointer-events: none;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-col-repeat), 1fr);
+    column-gap: var(--grid-col-gap);
+
+    @media (max-width: 900px) {
+      top: 200px;
+    }
+
+    @include media-down('tablet') {
+      display: none;
+    }
+
+    p {
+      font-size: 10rem;
+      text-transform: uppercase;
+      overflow: hidden;
+      font-weight: $font-weight-medium;
+      letter-spacing: 0.08em;
+      color: $color-text-primary;
+
+      .studies-lists__head-text {
+        display: inline-block;
+        color: $color-text-primary;
+      }
+    }
+
+    [data-item="1"] {
+      grid-column: 1 / span 1;
+      padding-left: 150rem;
+    }
+
+    [data-item="2"] {
+      grid-column: 2 / span 1;
+    }
+
+    [data-item="3"] {
+      grid-column: 4 / span 1;
+      text-align: right;
+      padding-right: 90rem;
+    }
+  }
+
+  &__contents {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    padding-bottom: 24px;
+    color: $color-text-primary;
+
+    &-ul {
+      display: flex;
+      align-items: flex-start;
+
+      .year {
+        min-width: 150rem;
+        height: fit-content;
+        font-size: 12rem;
+        position: relative;
+        top: 4rem;
+        overflow: hidden;
+        font-weight: $font-weight-medium;
+        letter-spacing: $tracking-hero;
+        white-space: nowrap;
+        color: $color-text-primary;
+
+        @include media-down('tablet') {
+          min-width: 92rem;
+        }
+      }
+
+      .studies-lists__items,
+      .contents {
+        display: flex !important;
+        flex-direction: column;
+        width: calc(100% - 150rem);
+
+        @include media-down('tablet') {
+          width: calc(100% - 92rem);
+        }
+      }
+
+      .list-link {
+        display: flex;
+        gap: 100rem;
+        padding-block: 4rem 6rem;
+        position: relative;
+        color: $color-text-primary;
+        align-items: center;
+        border-bottom: 1px solid #CCCCCC;
+
+        @include media-down('tablet') {
+          gap: 40rem;
+        }
+
+        p {
+          font-size: 12rem;
+          font-weight: $font-weight-medium;
+          letter-spacing: $tracking-hero;
+          line-height: $leading-tight;
+          color: $color-text-primary;
+        }
+
+        .word {
+          display: inline-block;
+          color: $color-text-primary;
+        }
+
+        .id {
+          min-width: 150rem;
+          height: fit-content;
+          padding-left: 30rem;
+          overflow: hidden;
+          will-change: padding-left;
+          white-space: nowrap;
+          color: $color-text-primary;
+
+          @include media-down('tablet') {
+            min-width: 50rem;
+            padding-left: 0 !important;
+          }
+        }
+
+        .title {
+          height: fit-content;
+          overflow: hidden;
+          min-width: 0;
+          will-change: padding-left;
+          color: $color-text-primary;
+
+          @media (min-width: 768px) {
+            min-width: 800rem;
+          }
+
+          .title-inner {
+            display: inline-block;
+            color: $color-text-primary;
+
+            @media (min-width: 768px) {
+              text-shadow: 0px -14rem 0px $color-text-primary;
+              transition: transform 0.3s ease;
+            }
+          }
+        }
+
+        @media (hover: hover) {
+          &:hover .title .title-inner {
+            transform: translateY(14rem);
+          }
+        }
+
+        .field {
+          min-width: 100rem;
+          height: fit-content;
+          overflow: hidden;
+          text-align: right;
+          margin-left: auto;
+          padding-right: 90rem;
+          white-space: nowrap;
+          color: $color-text-primary;
+
+          @include media-down('tablet') {
+            display: none;
+          }
+        }
+
+        .line {
+          display: none;
+        }
+
+        &[aria-disabled="true"] {
+          cursor: default;
+          pointer-events: none;
+        }
+
+        &:focus-visible {
+          outline: 1px solid $color-text-primary;
+          outline-offset: -1px;
+        }
+      }
+    }
+  }
+}

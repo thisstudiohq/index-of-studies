@@ -1,0 +1,51 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+@mixin media-up($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    $value: map.get($breakpoints, $breakpoint);
+    @media (min-width: $value) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+@mixin media-down($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    $value: map.get($breakpoints, $breakpoint);
+    @media (max-width: ($value - 0.02px)) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+@mixin media-between($min-breakpoint, $max-breakpoint) {
+  $min: $min-breakpoint;
+  $max: $max-breakpoint;
+
+  @if map.has-key($breakpoints, $min-breakpoint) {
+    $min: map.get($breakpoints, $min-breakpoint);
+  }
+
+  @if map.has-key($breakpoints, $max-breakpoint) {
+    $max: map.get($breakpoints, $max-breakpoint);
+  }
+
+  @media (min-width: $min) and (max-width: ($max - 0.02px)) {
+    @content;
+  }
+}
+
+@mixin respond-to($breakpoint) {
+  @include media-up($breakpoint) {
+    @content;
+  }
+}

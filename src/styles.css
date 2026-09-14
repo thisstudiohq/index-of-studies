@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "PP Neue Montreal";
+  --font-mono: "SF Mono";
+}

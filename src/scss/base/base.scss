@@ -1,0 +1,149 @@
+@use '../utils' as *;
+
+:root {
+  --color-bg-primary: #{$color-bg-primary};
+  --color-bg-surface: #{$color-bg-surface};
+  --color-bg-elevated: #{$color-bg-elevated};
+  --color-bg-subtle: #{$color-bg-subtle};
+
+  --color-text-primary: #{$color-text-primary};
+  --color-text-secondary: #{$color-text-secondary};
+  --color-text-muted: #{$color-text-muted};
+
+  --fg: #{$color-text-primary};
+  --bg: #{$color-bg-primary};
+
+  --color-border-subtle: #{$color-border-subtle};
+  --color-border-strong: #{$color-border-strong};
+
+  --color-accent: #{$color-accent};
+
+  --font-montreal: #{$font-montreal};
+  --font-mono: #{$font-mono};
+
+  --font-size-hero: #{$font-size-hero};
+  --font-size-hero-mobile: #{$font-size-hero-mobile};
+  --font-size-hero-desktop: #{$font-size-hero-desktop};
+  --font-size-body: #{$font-size-body};
+  --font-size-nav: #{$font-size-nav};
+  --font-size-desc: #{$font-size-desc};
+  --font-size-list: #{$font-size-list};
+  --font-size-label: #{$font-size-label};
+  --font-size-small: #{$font-size-small};
+
+  --grid-col-repeat: #{$grid-col-repeat};
+  --grid-col-gap: #{$grid-col-gap};
+  --grid-padding: #{$grid-padding};
+
+  --container-max-width: #{$container-max-width};
+  --container-padding: #{$container-padding-inline};
+
+  --line: #{$line};
+  --muted: #{$muted};
+  --pad-x: #{$pad-x};
+  --nav-h: #{$nav-h};
+  --year-w: #{$year-w};
+  --id-w: #{$id-w};
+  --field-w: #{$field-w};
+  --ease: #{$ease};
+}
+
+@include media-down('tablet') {
+  :root {
+    --grid-padding: #{$grid-padding-mobile};
+  }
+}
+
+html {
+  font-size: 0.0694444444vw !important;
+
+  @include media-down('tablet') {
+    font-size: 0.2666666667vw !important;
+  }
+}
+
+html,
+body,
+#app {
+  font-family: $font-montreal;
+  min-height: 100%;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  background-color: $color-bg-primary;
+  color: $color-text-primary;
+  font-family: $font-montreal;
+  font-size: $font-size-body;
+  font-weight: $font-weight-medium;
+  font-feature-settings: "palt";
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: $color-accent;
+  color: $color-bg-primary;
+}
+
+:focus-visible {
+  outline: 2px solid $color-text-secondary;
+  outline-offset: 2px;
+}
+
+.link {
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  height: fit-content;
+
+  &::before,
+  &::after {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    top: 100%;
+    left: 0;
+    pointer-events: none;
+  }
+
+  &::before {
+    content: "";
+  }
+
+  &--metis {
+    &::before {
+      transform-origin: 100% 50%;
+      transform: scale3d(0, 1, 1);
+      transition: transform 0.3s;
+    }
+
+    &:hover::before {
+      transform-origin: 0% 50%;
+      transform: scale3d(1, 1, 1);
+    }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+.cursor-ring {
+  mix-blend-mode: normal !important;
+  border-color: var(--color-text-primary, #1500E1) !important;
+  color: var(--color-text-primary, #1500E1) !important;
+}
+
+.cursor-dot {
+  mix-blend-mode: normal !important;
+  background-color: var(--color-text-primary, #1500E1) !important;
+}

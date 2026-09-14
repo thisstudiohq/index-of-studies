@@ -1,0 +1,100 @@
+@use '../utils' as *;
+
+@font-face {
+  font-family: $font-montreal;
+  src: $font-montreal-book-source;
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: $font-montreal;
+  src: $font-montreal-source;
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: $font-mono;
+  src: $font-mono-source;
+  font-display: block;
+}
+
+body {
+  font-family: $font-montreal;
+  font-size: $font-size-body;
+  font-weight: $font-weight-medium;
+  line-height: $leading-normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-montreal {
+  font-family: $font-montreal;
+}
+
+.font-mono {
+  font-family: $font-mono;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: $font-weight-bold;
+  line-height: $leading-tight;
+  letter-spacing: $tracking-hero;
+}
+
+h1 {
+  font-size: $font-size-hero;
+  line-height: $leading-hero;
+
+  @include media-down('tablet') {
+    font-size: $font-size-hero-mobile;
+  }
+}
+
+h2 {
+  font-size: $text-3xl;
+
+  @include media-down('tablet') {
+    font-size: $text-2xl;
+  }
+}
+
+h3 {
+  font-size: $text-2xl;
+}
+
+h4 {
+  font-size: $text-xl;
+}
+
+h5 {
+  font-size: $text-lg;
+}
+
+h6 {
+  font-size: $text-base;
+}
+
+p {
+  color: $color-text-secondary;
+  line-height: $leading-relaxed;
+}
+
+small {
+  font-size: $text-xs;
+}
+
+code,
+pre,
+kbd {
+  font-family: $font-mono;
+  font-size: $text-sm;
+}
