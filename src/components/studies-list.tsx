@@ -1,13 +1,45 @@
-import { useRef } from "react";
-import { useMagneticList } from "@/hooks/use-magnetic-list";
+import { useEffect, useRef } from "react";
+
+import gsap from "gsap";
+
 import { groupByYear } from "@/lib/studies";
+import { useIntro } from "@/lib/intro-context";
+import { useMagneticList } from "@/hooks/use-magnetic-list";
 
 export function StudiesList() {
 	const rootRef = useRef<HTMLElement>(null);
 	const headRef = useRef<HTMLDivElement>(null);
 	const groups = groupByYear();
+	const { isLoaded } = useIntro();
+	const hasAnimatedInRef = useRef(false);
 
 	useMagneticList(rootRef, headRef, { enabled: true });
+
+	useEffect(() => {
+		if (!isLoaded || hasAnimatedInRef.current) return;
+		const root = rootRef.current;
+		if (!root) return;
+
+		hasAnimatedInRef.current = true;
+
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+			gsap.set(root, { clearProps: "all" });
+			return;
+		}
+
+		gsap.fromTo(
+			root,
+			{ opacity: 0, y: 30 },
+			{
+				opacity: 1,
+				y: 0,
+				duration: 1.1,
+				ease: "power3.out",
+				delay: 0.55,
+				clearProps: "transform,opacity",
+			},
+		);
+	}, [isLoaded]);
 
 	return (
 		<section className="studies-lists" ref={rootRef}>
@@ -45,8 +77,8 @@ export function StudiesList() {
 											hasUrl
 												? undefined
 												: (event) => {
-														event.preventDefault();
-													}
+													event.preventDefault();
+												}
 										}
 									>
 										<p className="id">

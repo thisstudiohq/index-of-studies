@@ -1,11 +1,14 @@
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+
 import scssCss from "../scss/index.scss?url";
 import appCss from "../styles.css?url";
 import "../scss/index.scss";
-import { Cursor } from "#/components/cursor";
-import { SiteHeader } from "#/components/site-header";
-import { SmoothScroll } from "#/components/smooth-scroll";
-import { siteConfig } from "#/lib/site-config";
+
+import { Cursor } from "@/components/cursor";
+import { siteConfig } from "@/lib/site-config";
+import { IntroProvider } from "@/lib/intro-context";
+import { SiteHeader } from "@/components/site-header";
+import { SmoothScroll } from "@/components/smooth-scroll";
 
 export const Route = createRootRoute({
 	head: () => ({
@@ -118,11 +121,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				/>
 			</head>
 			<body suppressHydrationWarning>
-				<SmoothScroll>
-					<SiteHeader />
-					{children}
-					<Cursor />
-				</SmoothScroll>
+				<IntroProvider>
+					<SmoothScroll>
+						<SiteHeader />
+						{children}
+						<Cursor />
+					</SmoothScroll>
+				</IntroProvider>
 				<Scripts />
 			</body>
 		</html>

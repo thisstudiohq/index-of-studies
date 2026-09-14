@@ -1,5 +1,6 @@
-import gsap from "gsap";
 import { useEffect, useRef } from "react";
+
+import gsap from "gsap";
 
 export function Cursor() {
 	const dotRef = useRef<HTMLDivElement>(null);
@@ -8,9 +9,10 @@ export function Cursor() {
 
 	useEffect(() => {
 		if (typeof window === "undefined") return;
+		const isMobile = window.innerWidth < 768;
 		const isTouch = window.matchMedia("(pointer: coarse)").matches;
 		const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-		if (isTouch || reduced) return;
+		if (isMobile || isTouch || reduced) return;
 
 		const dot = dotRef.current;
 		const ring = ringRef.current;

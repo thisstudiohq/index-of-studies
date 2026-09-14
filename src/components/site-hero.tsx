@@ -1,9 +1,14 @@
-import gsap from "gsap";
 import { useEffect, useRef } from "react";
-import { total } from "#/lib/studies";
+
+import gsap from "gsap";
+
+import { total } from "@/lib/studies";
+import { useIntro } from "@/lib/intro-context";
 
 export function SiteHero() {
 	const ref = useRef<HTMLElement>(null);
+	const { isLoaded } = useIntro();
+	const hasAnimatedInRef = useRef(false);
 
 	useEffect(() => {
 		const root = ref.current;
@@ -17,32 +22,27 @@ export function SiteHero() {
 			return;
 		}
 
-		const animateIn = () => {
-			gsap.fromTo(
-				words,
-				{ yPercent: 110 },
-				{
-					yPercent: 0,
-					duration: 1.2,
-					ease: "power4.out",
-					stagger: 0.07,
-					delay: 0.15,
-					clearProps: "transform",
-				},
-			);
-			gsap.fromTo(
-				desc,
-				{ y: 16, opacity: 0 },
-				{ y: 0, opacity: 1, duration: 0.95, delay: 0.45, ease: "power3.out" },
-			);
-		};
+		if (!isLoaded || hasAnimatedInRef.current) return;
+		hasAnimatedInRef.current = true;
 
-		if (document.fonts?.ready) {
-			document.fonts.ready.then(animateIn);
-		} else {
-			animateIn();
-		}
-	}, []);
+		gsap.fromTo(
+			words,
+			{ yPercent: 110 },
+			{
+				yPercent: 0,
+				duration: 1.15,
+				ease: "power4.out",
+				stagger: 0.08,
+				delay: 0.2,
+				clearProps: "transform",
+			},
+		);
+		gsap.fromTo(
+			desc,
+			{ y: 16, opacity: 0 },
+			{ y: 0, opacity: 1, duration: 0.95, delay: 0.5, ease: "power3.out" },
+		);
+	}, [isLoaded]);
 
 	return (
 		<section className="hero" ref={ref}>

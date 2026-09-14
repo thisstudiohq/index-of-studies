@@ -95,6 +95,8 @@
 
 
 .hero {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 100rem;
@@ -205,6 +207,8 @@
 
 .footer,
 .studies-block {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100svh;
   min-height: 300px;
@@ -303,6 +307,7 @@
 
 .studies-lists {
   position: relative;
+  z-index: 1;
   padding-inline: var(--grid-padding);
   padding-bottom: 120rem;
   color: $color-text-primary;
@@ -322,7 +327,7 @@
     }
 
     @include media-down('tablet') {
-      display: none;
+      display: none !important;
     }
 
     p {
@@ -431,7 +436,7 @@
 
           @include media-down('tablet') {
             min-width: 50rem;
-            padding-left: 0 !important;
+            padding-left: 0;
           }
         }
 

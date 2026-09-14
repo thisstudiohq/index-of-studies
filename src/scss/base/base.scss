@@ -82,11 +82,13 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 ::selection {
-  background-color: $color-accent;
-  color: $color-bg-primary;
+  background: transparent;
+  color: inherit;
 }
 
 :focus-visible {
@@ -146,4 +148,11 @@ body {
 .cursor-dot {
   mix-blend-mode: normal !important;
   background-color: var(--color-text-primary, #1500E1) !important;
+}
+
+@include media-down('tablet') {
+  .cursor-ring,
+  .cursor-dot {
+    display: none !important;
+  }
 }

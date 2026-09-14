@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+
+import gsap from "gsap";
 import * as THREE from "three";
-import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+
+import { useIntro } from "@/lib/intro-context";
 import { getLenis } from "@/components/smooth-scroll";
 
 const MODEL_PATH = "/model/model.glb";
@@ -54,16 +58,81 @@ function disposeHierarchy(rootObject: THREE.Object3D): void {
 
 export function Scene() {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const [isDesktop, setIsDesktop] = useState(false);
 	const [isReady, setIsReady] = useState(false);
+	const { notifyModelLoaded, isLoaded } = useIntro();
+	const modelPivotRef = useRef<THREE.Group | null>(null);
+	const hasAnimatedInRef = useRef(false);
 
 	useEffect(() => {
+		const mediaQuery = window.matchMedia("(min-width: 768px)");
+		setIsDesktop(mediaQuery.matches);
+
+		if (!mediaQuery.matches) {
+			notifyModelLoaded();
+		}
+
+		const handleMediaChange = (event: MediaQueryListEvent) => {
+			setIsDesktop(event.matches);
+			if (!event.matches) {
+				notifyModelLoaded();
+			}
+		};
+
+		mediaQuery.addEventListener("change", handleMediaChange);
+		return () => {
+			mediaQuery.removeEventListener("change", handleMediaChange);
+		};
+	}, [notifyModelLoaded]);
+
+	useEffect(() => {
+		if (!isDesktop || !isLoaded || hasAnimatedInRef.current) return;
+		hasAnimatedInRef.current = true;
+		setIsReady(true);
+
+		const modelPivot = modelPivotRef.current;
+		if (!modelPivot) return;
+
+		const prefersReducedMotion = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		).matches;
+
+		if (prefersReducedMotion) {
+			modelPivot.scale.setScalar(calculateResponsiveScale(window.innerWidth));
+			modelPivot.rotation.set(0, 0, 0);
+			return;
+		}
+
+		const tl = gsap.timeline();
+		tl.to(modelPivot.scale, {
+			x: calculateResponsiveScale(window.innerWidth),
+			y: calculateResponsiveScale(window.innerWidth),
+			z: calculateResponsiveScale(window.innerWidth),
+			duration: 1.5,
+			ease: "power3.out",
+		}).to(
+			modelPivot.rotation,
+			{
+				y: 0,
+				x: 0,
+				duration: 1.8,
+				ease: "power3.out",
+			},
+			0,
+		);
+	}, [isDesktop, isLoaded]);
+
+	useEffect(() => {
+		if (!isDesktop) return;
 		const container = containerRef.current;
 		if (!container) return;
 
 		let isDestroyed = false;
 		let animationFrameId = 0;
 
-		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		const prefersReducedMotion = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		).matches;
 
 		const scene = new THREE.Scene();
 		const camera = new THREE.PerspectiveCamera(
@@ -98,6 +167,7 @@ export function Scene() {
 		const scrollGroup = new THREE.Group();
 		const idleGroup = new THREE.Group();
 		const modelPivot = new THREE.Group();
+		modelPivotRef.current = modelPivot;
 
 		scene.add(mouseGroup);
 		mouseGroup.add(scrollGroup);
@@ -105,7 +175,13 @@ export function Scene() {
 		idleGroup.add(modelPivot);
 
 		const baseScale = calculateResponsiveScale(window.innerWidth);
-		modelPivot.scale.setScalar(baseScale);
+		if (prefersReducedMotion) {
+			modelPivot.scale.setScalar(baseScale);
+		} else {
+			modelPivot.scale.set(0, 0, 0);
+			modelPivot.rotation.y = -Math.PI * 2;
+			modelPivot.rotation.x = 0.45;
+		}
 
 		const gltfLoader = new GLTFLoader();
 		gltfLoader.load(
@@ -114,11 +190,12 @@ export function Scene() {
 				if (isDestroyed) return;
 				centerModelGeometry(gltf.scene);
 				modelPivot.add(gltf.scene);
-				setIsReady(true);
+				notifyModelLoaded();
 			},
 			undefined,
 			(error) => {
 				console.error("Failed to load 3D model:", error);
+				notifyModelLoaded();
 			},
 		);
 
@@ -170,7 +247,9 @@ export function Scene() {
 			camera.aspect = width / height;
 			camera.updateProjectionMatrix();
 			renderer.setSize(width, height);
-			modelPivot.scale.setScalar(calculateResponsiveScale(width));
+			if (hasAnimatedInRef.current || prefersReducedMotion) {
+				modelPivot.scale.setScalar(calculateResponsiveScale(width));
+			}
 		};
 
 		window.addEventListener("resize", handleResize);
@@ -237,7 +316,9 @@ export function Scene() {
 				container.removeChild(renderer.domElement);
 			}
 		};
-	}, []);
+	}, [isDesktop]);
+
+	if (!isDesktop) return null;
 
 	return (
 		<div
