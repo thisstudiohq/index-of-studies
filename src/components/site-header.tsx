@@ -59,14 +59,14 @@ export function SiteHeader() {
 				>
 					Studies
 				</a>
-				<a
+				{/* <a
 					href="/snapshot"
 					className="nav__link link link--metis"
 					aria-current={pathname.startsWith("/snapshot") ? "page" : undefined}
 					onClick={go("/snapshot")}
 				>
 					Snapshot
-				</a>
+				</a> */}
 			</nav>
 			<div className="nav__center">
 				{/* <a
