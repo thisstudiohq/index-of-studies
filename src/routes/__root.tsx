@@ -26,10 +26,12 @@ export const Route = createRootRoute({
 			{ property: "og:description", content: siteConfig.tagline },
 			{ property: "og:url", content: siteConfig.url },
 			{ property: "og:locale", content: siteConfig.locale },
+			{ property: "og:image", content: `${siteConfig.url}/opengraph-image.png` },
 
-			{ name: "twitter:card", content: "summary" },
+			{ name: "twitter:card", content: "summary_large_image" },
 			{ name: "twitter:title", content: `${siteConfig.name} — ${siteConfig.author}` },
 			{ name: "twitter:description", content: siteConfig.tagline },
+			{ name: "twitter:image", content: `${siteConfig.url}/opengraph-image.png` },
 		],
 		links: [
 			{ rel: "canonical", href: siteConfig.url },
