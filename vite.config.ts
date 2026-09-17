@@ -7,6 +7,13 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 
 const config = defineConfig({
 	resolve: { tsconfigPaths: true },
+	environments: {
+		ssr: {
+			resolve: {
+				noExternal: ["gsap", "lenis", "ogl", "three"],
+			},
+		},
+	},
 	css: {
 		preprocessorOptions: {
 			scss: {},
