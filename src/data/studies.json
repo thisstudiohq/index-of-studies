@@ -70,5 +70,13 @@
 		"year": 2026,
 		"url": "https://009-inkwell-intro.netlify.app",
 		"description": "Recreation of the inkwell.tech opening ring: WebGL cards in OGL, choreography in GSAP, hover as a distance field."
+	},
+		{
+		"id": "S-010",
+		"title": "Lace: 3D Shoe Grid",
+		"field": "WebGL",
+		"year": 2025,
+		"url": "https://lace-shoes.netlify.app",
+		"description": "A playful interaction study focused on 3D grid navigation, camera rigging, and topography rendering."
 	}
 ]
